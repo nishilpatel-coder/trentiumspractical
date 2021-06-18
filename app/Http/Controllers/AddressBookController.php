@@ -17,13 +17,25 @@ class AddressBookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
-        $addressbook = addressbook::latest()->paginate(2);
+        $zipcode = $request->query('zipcode');
+        $city_id = $request->query('city_id');
+        $addressbook = addressbook::latest();
+        if(!empty($city_id)){
+            $addressbook->where('city_id','=',$city_id);
+        }
+        if(!empty($zipcode)){
+            $addressbook->where('zipcode','=',$zipcode);
+        }
+        $addressbook = $addressbook->paginate(2);
         $city = city::pluck('name','id');
+        $city->prepend('Please Select City');
         return View::make('listing')
             ->with('addressbook', $addressbook)
-            ->with('city', $city);
+            ->with('city', $city)
+            ->with('zipcode', $zipcode)
+            ->with('city_id', $city_id);
     }
 
     /**

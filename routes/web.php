@@ -20,3 +20,5 @@ Route::get('/', function () {
 
 Route::resource('addressbook', 'App\Http\Controllers\AddressBookController');
 
+Route::get('/addressbook/{zipcode?}/{city_id?}', 'App\Http\Controllers\AddressBookController@index');
+

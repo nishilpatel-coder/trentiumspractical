@@ -26,7 +26,7 @@
 
     <div class="form-group @if ($errors->has('zipcode')) has-error @endif">
         {{ Form::label('zipcode', 'Zip-code') }}
-        {{ Form::text('zipcode', null, array('class' => 'form-control')) }}
+        {{ Form::text('zipcode', $zipcode, array('class' => 'form-control')) }}
         @error('zipcode')
             <span class="text-danger" role="alert">
                 <strong>{{ $message }}</strong>
@@ -35,7 +35,7 @@
     </div>
     <div class="form-group @if ($errors->has('city_id')) has-error @endif">
         {{ Form::label('city_id', 'City') }}
-        {{ Form::select('city_id', $city, null, array('class' => 'form-control')) }}
+        {{ Form::select('city_id', $city, $city_id, array('class' => 'form-control')) }}
         @error('city_id')
             <span class="text-danger" role="alert">
                 <strong>{{ $message }}</strong>
